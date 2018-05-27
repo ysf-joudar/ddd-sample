@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import javax.validation.constraints.NotNull;
 
-public class BaseEntity {
+public abstract class BaseEntity {
 
 	@NotNull
 	private String id = UUID.randomUUID().toString();
