@@ -12,6 +12,7 @@ public class OrderVO implements Serializable {
 	private List<Long> items;
 
 	public OrderVO() {
+		super();
 	}
 
 	public OrderVO(Long customerId, List<Long> items) {

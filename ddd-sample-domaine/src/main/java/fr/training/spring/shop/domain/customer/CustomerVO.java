@@ -20,6 +20,7 @@ public class CustomerVO implements Serializable {
 	}
 
 	public CustomerVO() {
+		super();
 	}
 
 	public String getName() {

@@ -15,6 +15,7 @@ public class ItemVO implements Serializable {
 	private int price;
 
 	public ItemVO() {
+		super();
 	}
 
 	public ItemVO(String description, int price) {
