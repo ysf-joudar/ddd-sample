@@ -8,13 +8,11 @@ public class CustomerVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@NotNull
 	private String name;
 
-	@NotNull
 	private String password;
 
-	public CustomerVO(String name, String password) {
+	public CustomerVO(@NotNull String name, @NotNull String password) {
 		this.name = name;
 		this.password = password;
 	}
@@ -27,7 +25,7 @@ public class CustomerVO implements Serializable {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(@NotNull String name) {
 		this.name = name;
 	}
 
@@ -35,7 +33,7 @@ public class CustomerVO implements Serializable {
 		return password;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(@NotNull String password) {
 		this.password = password;
 	}
 

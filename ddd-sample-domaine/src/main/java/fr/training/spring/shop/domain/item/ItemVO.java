@@ -8,17 +8,15 @@ public class ItemVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@NotNull
 	private String description;
 
-	@NotNull
 	private int price;
 
 	public ItemVO() {
 		super();
 	}
 
-	public ItemVO(String description, int price) {
+	public ItemVO(@NotNull String description, int price) {
 		this.description = description;
 		this.price = price;
 	}
@@ -27,7 +25,7 @@ public class ItemVO implements Serializable {
 		return description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(@NotNull String description) {
 		this.description = description;
 	}
 
