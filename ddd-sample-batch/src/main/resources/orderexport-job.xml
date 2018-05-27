@@ -25,7 +25,7 @@
 				<property name="requiredType" value="java.lang.String" />
 			</bean>
 		</property>
-		<property name="sql" value="SELECT ORDER_ID FROM ORDERS" />
+		<property name="sql" value="SELECT ID FROM ORDERS" />
 	</bean>
 
 	<!-- ItemWriter writes a line into output flat file -->

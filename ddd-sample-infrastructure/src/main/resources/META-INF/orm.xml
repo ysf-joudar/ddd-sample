@@ -6,13 +6,21 @@
 	version="1.0">
 	<description>My First JPA XML Application</description>
 	<package>entity</package>
+
+	<mapped-superclass
+		class="fr.training.spring.shop.domain.common.BaseEntity"
+		access="FIELD">
+		<attributes>
+			<id name="id" >
+				<column name="ID"  />
+			</id>
+		</attributes>
+	</mapped-superclass>
+
 	<entity
 		class="fr.training.spring.shop.domain.customer.CustomerEntity">
 		<table name="CUSTOMER" />
 		<attributes>
-			<id name="id">
-				<column name="CUSTOMER_ID" />
-			</id>
 			<embedded name="customerVO" />
 		</attributes>
 	</entity>
@@ -32,9 +40,6 @@
 	<entity class="fr.training.spring.shop.domain.item.ItemEntity">
 		<table name="ITEM" />
 		<attributes>
-			<id name="id">
-				<column name="ITEM_ID" />
-			</id>
 			<embedded name="itemVO" />
 			<many-to-many name="orders" fetch="LAZY" />
 		</attributes>
@@ -54,14 +59,11 @@
 	<entity class="fr.training.spring.shop.domain.order.OrderEntity">
 		<table name="ORDERS" />
 		<attributes>
-			<id name="id">
-				<column name="ORDER_ID" />
-			</id>
 			<many-to-one name="customer" fetch="LAZY">
-				<join-column name="CUSTOMER_ID" />
+				<join-column name="CUSTOMER_ID"  />
 			</many-to-one>
-			<many-to-many name="items" fetch="LAZY" 
-				mapped-by="orders"  />
+			<many-to-many name="items" fetch="LAZY"
+				mapped-by="orders" />
 		</attributes>
 	</entity>
 </entity-mappings>
