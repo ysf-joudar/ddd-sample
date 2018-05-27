@@ -22,7 +22,7 @@ public class OrderDTO implements Serializable {
 	public OrderDTO(String orderID, String customerID) {
 		this.orderID = orderID;
 		this.customerID = customerID;
-		items = new ArrayList<ItemDTO>();
+		items = new ArrayList<>();
 	}
 
 	public String getOrderID() {

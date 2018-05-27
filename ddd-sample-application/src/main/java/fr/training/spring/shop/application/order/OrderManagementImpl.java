@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import fr.training.spring.shop.application.item.ItemDTO;
 import fr.training.spring.shop.domain.customer.CustomerEntity;
 import fr.training.spring.shop.domain.customer.CustomerRepository;
 import fr.training.spring.shop.domain.item.ItemEntity;
@@ -41,7 +42,7 @@ public class OrderManagementImpl implements OrderManagement {
 		OrderEntity orderEntity = orderMapper.toEntity(orderDTO);
 		CustomerEntity customerEntity = customerRepository.findOne(orderDTO.getCustomerID());
 		List<ItemEntity> items = itemRepository
-				.getAllItems(orderDTO.getItems().stream().map(it -> it.getItemID()).collect(Collectors.toList()));
+				.getAllItems(orderDTO.getItems().stream().map(ItemDTO::getItemID).collect(Collectors.toList()));
 		orderEntity.setCustomer(customerEntity);
 		orderEntity.setItems(items);
 		orderEntity = orderRepository.addOrder(orderEntity);
