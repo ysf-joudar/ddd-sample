@@ -15,11 +15,10 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import fr.training.spring.shop.domain.customer.CustomerEntity;
-import fr.training.spring.shop.domain.customer.CustomerRepository;
 import fr.training.spring.shop.domain.item.ItemEntity;
-import fr.training.spring.shop.domain.item.ItemRepository;
 import fr.training.spring.shop.domain.order.OrderEntity;
-import fr.training.spring.shop.domain.order.OrderRepository;
+import fr.training.spring.shop.infrastructure.customer.CustomerRepository;
+import fr.training.spring.shop.infrastructure.item.ItemRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest
@@ -44,7 +43,7 @@ public class OrderRepositoryImplTest {
 	@Test
 	public void testAddOrder() {
 		OrderEntity orderEntity = this.createOrder("123e4567-e89b-42d3-a456-556642440000", "1", 99);
-		orderRepository.addOrder(orderEntity);
+		orderRepository.save(orderEntity);
 		assertNotNull(orderEntity.getId());
 	}
 
@@ -53,7 +52,7 @@ public class OrderRepositoryImplTest {
 		OrderEntity orderEntity1 = this.createOrder("123e4567-e89b-42d3-a456-556642440000", "1", 99);
 		OrderEntity orderEntity2 = this.createOrder("123e4567-e89b-42d3-a456-556642440000", "2", 99);
 		List<OrderEntity> orders = Stream.of(orderEntity1, orderEntity2).collect(Collectors.toList());
-		orderRepository.addOrders(orders);
+		orderRepository.save(orders);
 		assertNotNull(orderEntity1.getId());
 		assertNotNull(orderEntity2.getId());
 	}

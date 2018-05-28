@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.training.spring.shop.domain.item.ItemEntity;
-import fr.training.spring.shop.domain.item.ItemRepository;
+import fr.training.spring.shop.infrastructure.item.ItemRepository;
 
 @Service
 @Transactional
@@ -24,7 +24,7 @@ public class ItemManagementImpl implements ItemManagement {
 	@Override
 	@Cacheable("itemCache")
 	public List<ItemDTO> getAllItems() {
-		List<ItemEntity> itemEntities = itemRepository.getAllItems();
+		List<ItemEntity> itemEntities = itemRepository.findAll();
 		return itemMapper.toDto(itemEntities);
 	}
 
@@ -32,7 +32,7 @@ public class ItemManagementImpl implements ItemManagement {
 	@CacheEvict(value = "itemCache", allEntries = true)
 	public ItemDTO addItem(ItemDTO itemDTO) {
 		ItemEntity itemEntity = itemMapper.toEntity(itemDTO);
-		itemEntity = itemRepository.addItem(itemEntity);
+		itemEntity = itemRepository.save(itemEntity);
 		return itemMapper.toDto(itemEntity);
 	}
 

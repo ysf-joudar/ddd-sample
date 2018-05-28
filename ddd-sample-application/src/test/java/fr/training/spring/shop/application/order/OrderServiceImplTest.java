@@ -17,13 +17,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import fr.training.spring.shop.domain.customer.CustomerEntity;
-import fr.training.spring.shop.domain.customer.CustomerRepository;
-import fr.training.spring.shop.domain.customer.CustomerVO;
 import fr.training.spring.shop.domain.item.ItemEntity;
-import fr.training.spring.shop.domain.item.ItemRepository;
-import fr.training.spring.shop.domain.item.ItemVO;
 import fr.training.spring.shop.domain.order.OrderEntity;
-import fr.training.spring.shop.domain.order.OrderRepository;
+import fr.training.spring.shop.infrastructure.customer.CustomerRepository;
+import fr.training.spring.shop.infrastructure.item.ItemRepository;
+import fr.training.spring.shop.infrastructure.order.OrderRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -57,15 +55,15 @@ public class OrderServiceImplTest {
 	@Test
 	public void testAddOrder() {
 		OrderEntity orderEntity = this.createOrder("NASS", "123456", "DESC99", 99);
-		when(orderRepository.addOrder(orderEntity)).thenReturn(orderEntity);
+		when(orderRepository.save(orderEntity)).thenReturn(orderEntity);
 		OrderDTO orderDTO = new OrderDTO(orderEntity.getId(), "123e4567-e89b-42d3-a456-556642440000");
 		OrderDTO orderResultDTO = orderManagement.addOrder(orderDTO);
 		assertNotNull(orderResultDTO);
 	}
 
 	private OrderEntity createOrder(String customerName, String customerPass, String itemDesc, int price) {
-		CustomerEntity customer = new CustomerEntity(new CustomerVO("nass", "123456"));
-		ItemEntity itemEntity = new ItemEntity(new ItemVO("DESC99", 99));
+		CustomerEntity customer = new CustomerEntity("nass", "123456");
+		ItemEntity itemEntity = new ItemEntity("DESC99", 99);
 		OrderEntity orderEntity = new OrderEntity();
 		orderEntity.setCustomer(customer);
 		orderEntity.setItems(Arrays.asList(itemEntity));

@@ -13,8 +13,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import fr.training.spring.shop.domain.item.ItemEntity;
-import fr.training.spring.shop.domain.item.ItemRepository;
-import fr.training.spring.shop.domain.item.ItemVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest
@@ -25,22 +23,22 @@ public class ItemRepositoryImplTest {
 
 	@Test
 	public void testGetAllItems() {
-		List<ItemEntity> itemEntities = itemRepository.getAllItems();
+		List<ItemEntity> itemEntities = itemRepository.findAll();
 		assertNotNull(itemEntities);
 		assertTrue(itemEntities.size() == 5);
 	}
 
 	@Test
 	public void testAddItem() {
-		ItemEntity itemEntity = new ItemEntity(new ItemVO("DESC99", 99));
-		itemRepository.addItem(itemEntity);
+		ItemEntity itemEntity = new ItemEntity("DESC99", 99);
+		itemRepository.save(itemEntity);
 		assertNotNull(itemEntity.getId());
 	}
 
 	@Test
 	public void testGetAllItemsWithList() {
 		List<String> items = Arrays.asList("1", "2", "3");
-		List<ItemEntity> itemEntities = itemRepository.getAllItems(items);
+		List<ItemEntity> itemEntities = itemRepository.findByIdIn(items);
 		assertNotNull(itemEntities);
 		assertTrue(itemEntities.size() == 3);
 	}

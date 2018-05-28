@@ -12,8 +12,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import fr.training.spring.shop.domain.customer.CustomerEntity;
-import fr.training.spring.shop.domain.customer.CustomerRepository;
-import fr.training.spring.shop.domain.customer.CustomerVO;
+import fr.training.spring.shop.infrastructure.customer.CustomerRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -27,9 +26,8 @@ public class CustomerManagementImplTest {
 
 	@Test
 	public void testCreate() {
-		CustomerVO customerVO = new CustomerVO("NAME1", "PASS1");
-		CustomerEntity customerEntity = new CustomerEntity(customerVO);
-		when(customerRepository.create(customerEntity)).thenReturn(customerEntity);
+		CustomerEntity customerEntity = new CustomerEntity("NAME1", "PASS1");
+		when(customerRepository.save(customerEntity)).thenReturn(customerEntity);
 		CustomerDTO customerDTO = new CustomerDTO(customerEntity.getId(), "NAME1", "PASS1");
 		CustomerDTO customerResultDTO = customerManagement.create(customerDTO);
 		assertNotNull(customerDTO);
@@ -38,8 +36,7 @@ public class CustomerManagementImplTest {
 
 	@Test
 	public void testFindOne() {
-		CustomerVO customerVO = new CustomerVO("NAME1", "PASS1");
-		CustomerEntity customerEntity = new CustomerEntity(customerVO);
+		CustomerEntity customerEntity = new CustomerEntity("NAME1", "PASS1");
 		customerEntity.setId("123e4567-e89b-42d3-a456-556642440000");
 		when(customerRepository.findOne("123e4567-e89b-42d3-a456-556642440000")).thenReturn(customerEntity);
 		CustomerDTO customerResultDTO = customerManagement.findOne("123e4567-e89b-42d3-a456-556642440000");

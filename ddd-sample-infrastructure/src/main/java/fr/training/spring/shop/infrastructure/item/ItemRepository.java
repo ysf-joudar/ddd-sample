@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import fr.training.spring.shop.domain.item.ItemEntity;
 
-public interface ItemDataJpaRepository extends JpaRepository<ItemEntity, String> {
+public interface ItemRepository extends JpaRepository<ItemEntity, String> {
 
 	List<ItemEntity> findByIdIn(List<String> id);
 

@@ -2,12 +2,36 @@ package fr.training.spring.shop.domain.common;
 
 import java.util.UUID;
 
-import javax.validation.constraints.NotNull;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
 
+@MappedSuperclass
 public abstract class BaseEntity {
 
-	@NotNull
-	private String id = UUID.randomUUID().toString();
+	@Version
+	private int version;
+
+	@Id
+	@Column(name = "ID", unique = true, nullable = false, length = 36)
+	private String id;
+
+	public BaseEntity() {
+		this.id = UUID.randomUUID().toString();
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	/**
+	 * @param version
+	 *            the version to set
+	 */
+	public void setVersion(int version) {
+		this.version = version;
+	}
 
 	public String getId() {
 		return id;

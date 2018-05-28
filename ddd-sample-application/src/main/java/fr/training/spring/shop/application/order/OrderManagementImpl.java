@@ -9,11 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import fr.training.spring.shop.application.item.ItemDTO;
 import fr.training.spring.shop.domain.customer.CustomerEntity;
-import fr.training.spring.shop.domain.customer.CustomerRepository;
 import fr.training.spring.shop.domain.item.ItemEntity;
-import fr.training.spring.shop.domain.item.ItemRepository;
 import fr.training.spring.shop.domain.order.OrderEntity;
-import fr.training.spring.shop.domain.order.OrderRepository;
+import fr.training.spring.shop.infrastructure.customer.CustomerRepository;
+import fr.training.spring.shop.infrastructure.item.ItemRepository;
+import fr.training.spring.shop.infrastructure.order.OrderRepository;
 
 @Service
 @Transactional
@@ -42,10 +42,10 @@ public class OrderManagementImpl implements OrderManagement {
 		OrderEntity orderEntity = orderMapper.toEntity(orderDTO);
 		CustomerEntity customerEntity = customerRepository.findOne(orderDTO.getCustomerID());
 		List<ItemEntity> items = itemRepository
-				.getAllItems(orderDTO.getItems().stream().map(ItemDTO::getItemID).collect(Collectors.toList()));
+				.findAll(orderDTO.getItems().stream().map(ItemDTO::getItemID).collect(Collectors.toList()));
 		orderEntity.setCustomer(customerEntity);
 		orderEntity.setItems(items);
-		orderEntity = orderRepository.addOrder(orderEntity);
+		orderEntity = orderRepository.save(orderEntity);
 		return orderMapper.toDto(orderEntity);
 	}
 

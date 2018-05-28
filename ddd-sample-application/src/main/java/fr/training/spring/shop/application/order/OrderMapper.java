@@ -17,21 +17,19 @@ public interface OrderMapper {
 
 	@Mapping(target = "customer.id", source = "customerID")
 	@Mapping(target = "id", source = "orderID")
+	@Mapping(target = "version", ignore = true)
 	OrderEntity toEntity(OrderDTO orderDTO);
 
-	@Mapping(target = "itemVO.description", source = "description")
 	@Mapping(target = "id", source = "itemID")
 	@Mapping(target = "orders", ignore = true)
-	@Mapping(target = "itemVO.price", source = "price")
+	@Mapping(target = "version", ignore = true)
 	ItemEntity toEntity(ItemDTO itemDTO);
 
 	@Mapping(target = "customerID", source = "customer.id")
 	@Mapping(target = "orderID", source = "id")
 	OrderDTO toDto(OrderEntity orderEntity);
 
-	@Mapping(target = "description", source = "itemVO.description")
 	@Mapping(target = "itemID", source = "id")
-	@Mapping(target = "price", source = "itemVO.price")
 	ItemDTO toDto(ItemEntity itemEntity);
 
 	List<OrderEntity> toEntity(List<OrderDTO> dtoList);

@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import fr.training.spring.shop.domain.order.OrderEntity;
 
-public interface OrderDataJpaRepository extends JpaRepository<OrderEntity, String> {
+public interface OrderRepository extends JpaRepository<OrderEntity, String> {
 
 	@Query("select o from OrderEntity o where o.customer.id = :id")
 	List<OrderEntity> getOrdersForCustomer(@Param("id") String id);

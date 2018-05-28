@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.training.spring.shop.domain.customer.CustomerEntity;
-import fr.training.spring.shop.domain.customer.CustomerRepository;
+import fr.training.spring.shop.infrastructure.customer.CustomerRepository;
 
 @Service
 @Transactional
@@ -20,7 +20,7 @@ public class CustomerManagementImpl implements CustomerManagement {
 	@Override
 	public CustomerDTO create(CustomerDTO customeDTO) {
 		CustomerEntity customerEntity = customeEntityMapper.toEntity(customeDTO);
-		customerEntity = customerRepository.create(customerEntity);
+		customerEntity = customerRepository.save(customerEntity);
 		return customeEntityMapper.toDto(customerEntity);
 	}
 

@@ -16,8 +16,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import fr.training.spring.shop.domain.item.ItemEntity;
-import fr.training.spring.shop.domain.item.ItemRepository;
-import fr.training.spring.shop.domain.item.ItemVO;
+import fr.training.spring.shop.infrastructure.item.ItemRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -31,9 +30,9 @@ public class ItemServiceImplTest {
 
 	@Test
 	public void testGetAllItems() {
-		ItemEntity itemEntity = new ItemEntity(new ItemVO("DESC99", 99));
+		ItemEntity itemEntity = new ItemEntity("DESC99", 99);
 		List<ItemEntity> items = Arrays.asList(itemEntity);
-		when(itemRepository.getAllItems()).thenReturn(items);
+		when(itemRepository.findAll()).thenReturn(items);
 		List<ItemDTO> itemsResult = itemManagement.getAllItems();
 		assertNotNull(itemsResult);
 		assertTrue(itemsResult.size() == 1);
@@ -41,9 +40,8 @@ public class ItemServiceImplTest {
 
 	@Test
 	public void testAddItem() {
-		ItemVO itemVO = new ItemVO("DESC99", 99);
-		ItemEntity itemEntity = new ItemEntity(itemVO);
-		when(itemRepository.addItem(itemEntity)).thenReturn(itemEntity);
+		ItemEntity itemEntity = new ItemEntity("DESC99", 99);
+		when(itemRepository.save(itemEntity)).thenReturn(itemEntity);
 
 		ItemDTO itemDTO = new ItemDTO(itemEntity.getId(), "DESC99", 99);
 		ItemDTO itemResultDTO = itemManagement.addItem(itemDTO);
