@@ -46,4 +46,45 @@ public class OrderEntity extends BaseEntity {
 		this.customer = customer;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
+		result = prime * result + ((items == null) ? 0 : items.hashCode());
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OrderEntity other = (OrderEntity) obj;
+		if (customer == null) {
+			if (other.customer != null)
+				return false;
+		} else if (!customer.equals(other.customer))
+			return false;
+		if (items == null) {
+			if (other.items != null)
+				return false;
+		} else if (!items.equals(other.items))
+			return false;
+		return true;
+	}
+
 }
