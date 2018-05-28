@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,9 +55,10 @@ public class OrderServiceImplTest {
 
 	@Test
 	public void testAddOrder() {
-		OrderEntity orderEntity = this.createOrder("NASS", "123456", "DESC99", 99);
+		OrderEntity orderEntity = new OrderEntity();
+		orderEntity.setItems(new ArrayList<>());
 		when(orderRepository.save(orderEntity)).thenReturn(orderEntity);
-		OrderDTO orderDTO = new OrderDTO(orderEntity.getId(), "123e4567-e89b-42d3-a456-556642440000");
+		OrderDTO orderDTO = new OrderDTO(orderEntity.getId(), null);
 		OrderDTO orderResultDTO = orderManagement.addOrder(orderDTO);
 		assertNotNull(orderResultDTO);
 	}
