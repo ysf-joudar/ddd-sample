@@ -33,7 +33,7 @@ pipeline {
     stage('Quality') {
       steps {
         withMaven(jdk: 'JDK-8', maven: 'MAVEN-3') {
-          sh 'mvn sonar:sonar'
+          sh 'mvn sonar:sonar -Dsonar.projectKey="ddd-sample-develop"'
         }
 
       }
