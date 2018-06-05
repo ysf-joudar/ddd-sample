@@ -4,7 +4,7 @@
 	<include
 		resource="org/springframework/boot/logging/logback/base.xml" />
 
-	<logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" />
+	<logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="WARN" />
 	<logger name="javax.activation" level="WARN" />
 	<logger name="javax.mail" level="WARN" />
 	<logger name="javax.xml.bind" level="WARN" />
