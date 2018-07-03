@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,8 @@ import fr.training.spring.shop.application.order.OrderManagement;
 @RequestMapping("/api")
 public class OrderResource {
 
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	@Autowired
 	private OrderManagement orderManagement;
 
@@ -29,6 +33,7 @@ public class OrderResource {
 
 	@GetMapping("/orders/{customerID}")
 	public List<OrderDTO> getOrders(@PathVariable String customerID) {
+		logger.info("Start some work from the scheduled task");
 		return orderManagement.getOrdersForCustomer(customerID);
 	}
 
