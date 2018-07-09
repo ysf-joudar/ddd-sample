@@ -1,10 +1,10 @@
-package fr.training.spring.shop.application.order;
+package fr.training.spring.shop.presentation.order.rest;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.training.spring.shop.application.item.ItemDTO;
+import fr.training.spring.shop.presentation.item.rest.ItemDTO;
 
 public class OrderDTO implements Serializable {
 

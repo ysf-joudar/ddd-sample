@@ -18,22 +18,16 @@ public class ItemManagementImpl implements ItemManagement {
 	@Autowired
 	private ItemRepository itemRepository;
 
-	@Autowired
-	private ItemMapper itemMapper;
-
 	@Override
 	@Cacheable("itemCache")
-	public List<ItemDTO> getAllItems() {
-		List<ItemEntity> itemEntities = itemRepository.getAllItems();
-		return itemMapper.toDto(itemEntities);
+	public List<ItemEntity> getAllItems() {
+		return itemRepository.getAllItems();
 	}
 
 	@Override
 	@CacheEvict(value = "itemCache", allEntries = true)
-	public ItemDTO addItem(ItemDTO itemDTO) {
-		ItemEntity itemEntity = itemMapper.toEntity(itemDTO);
-		itemEntity = itemRepository.addItem(itemEntity);
-		return itemMapper.toDto(itemEntity);
+	public ItemEntity addItem(ItemEntity itemEntity) {
+		return itemRepository.addItem(itemEntity);
 	}
 
 }

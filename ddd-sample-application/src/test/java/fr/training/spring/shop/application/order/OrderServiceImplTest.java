@@ -48,7 +48,7 @@ public class OrderServiceImplTest {
 		List<OrderEntity> orders = Stream.of(orderEntity1, orderEntity2).collect(Collectors.toList());
 		when(orderRepository.getOrdersForCustomer("123e4567-e89b-42d3-a456-556642440000")).thenReturn(orders);
 
-		List<OrderDTO> ordersResult = orderManagement.getOrdersForCustomer("123e4567-e89b-42d3-a456-556642440000");
+		List<OrderEntity> ordersResult = orderManagement.getOrdersForCustomer("123e4567-e89b-42d3-a456-556642440000");
 
 		assertNotNull(ordersResult);
 		assertEquals(2, ordersResult.size());
@@ -58,9 +58,8 @@ public class OrderServiceImplTest {
 	public void testAddOrder() {
 		OrderEntity orderEntity = this.createOrder("NASS", "123456", "DESC99", 99);
 		when(orderRepository.addOrder(orderEntity)).thenReturn(orderEntity);
-		OrderDTO orderDTO = new OrderDTO(orderEntity.getId(), "123e4567-e89b-42d3-a456-556642440000");
-		OrderDTO orderResultDTO = orderManagement.addOrder(orderDTO);
-		assertNotNull(orderResultDTO);
+		OrderEntity orderResult = orderManagement.addOrder(orderEntity);
+		assertNotNull(orderResult);
 	}
 
 	private OrderEntity createOrder(String customerName, String customerPass, String itemDesc, int price) {

@@ -60,7 +60,7 @@ public class OrderExportJobTest {
 	 */
 	@Test
 	public void testJob() throws Exception {
-		File targetFile = new File(TMP_DIR + "/orders.csv");
+		File targetFile = new File(TMP_DIR + "/orders.txt");
 		// File expectedFile = new
 		// ClassPathResource("OrderExportJobTest/expected/orders.csv").getFile();
 

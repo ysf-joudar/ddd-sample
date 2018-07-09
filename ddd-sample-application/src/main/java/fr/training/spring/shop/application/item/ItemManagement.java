@@ -2,10 +2,12 @@ package fr.training.spring.shop.application.item;
 
 import java.util.List;
 
+import fr.training.spring.shop.domain.item.ItemEntity;
+
 public interface ItemManagement {
 
-	List<ItemDTO> getAllItems();
+	List<ItemEntity> getAllItems();
 
-	ItemDTO addItem(ItemDTO itemDTO);
+	ItemEntity addItem(ItemEntity itemEntity);
 
 }

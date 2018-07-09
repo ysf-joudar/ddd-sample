@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.training.spring.shop.application.order.OrderDTO;
 import fr.training.spring.shop.application.order.OrderManagement;
+import fr.training.spring.shop.domain.order.OrderEntity;
 
 @RestController
 @RequestMapping("/api")
@@ -26,15 +26,20 @@ public class OrderResource {
 	@Autowired
 	private OrderManagement orderManagement;
 
+	@Autowired
+	private OrderMapper orderMapper;
+
 	@PostMapping("/orders")
 	public void addOrder(@Valid @RequestBody OrderDTO orderDTO) {
-		orderManagement.addOrder(orderDTO);
+		OrderEntity orderEntity = orderMapper.toEntity(orderDTO);
+		orderManagement.addOrder(orderEntity);
 	}
 
 	@GetMapping("/orders/{customerID}")
 	public List<OrderDTO> getOrders(@PathVariable String customerID) {
 		logger.info("Start some work from the scheduled task");
-		return orderManagement.getOrdersForCustomer(customerID);
+		List<OrderEntity> orderEntity = orderManagement.getOrdersForCustomer(customerID);
+		return orderMapper.toDto(orderEntity);
 	}
 
 }

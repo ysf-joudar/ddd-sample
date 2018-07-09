@@ -7,7 +7,6 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(basePackages = { "fr.training.spring.shop" }, lazyInit = true)
 public class SpringBootApp {
-
 	/**
 	 * Entry point for spring-boot based app
 	 *

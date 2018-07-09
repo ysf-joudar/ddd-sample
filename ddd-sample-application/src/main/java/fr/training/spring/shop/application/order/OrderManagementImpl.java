@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.training.spring.shop.application.item.ItemDTO;
 import fr.training.spring.shop.domain.customer.CustomerEntity;
 import fr.training.spring.shop.domain.customer.CustomerRepository;
 import fr.training.spring.shop.domain.item.ItemEntity;
@@ -28,31 +27,24 @@ public class OrderManagementImpl implements OrderManagement {
 	@Autowired
 	private ItemRepository itemRepository;
 
-	@Autowired
-	private OrderMapper orderMapper;
-
 	@Override
-	public List<OrderDTO> getOrdersForCustomer(String customerID) {
-		List<OrderEntity> orderEntity = orderRepository.getOrdersForCustomer(customerID);
-		return orderMapper.toDto(orderEntity);
+	public List<OrderEntity> getOrdersForCustomer(String customerID) {
+		return orderRepository.getOrdersForCustomer(customerID);
 	}
 
 	@Override
-	public OrderDTO addOrder(OrderDTO orderDTO) {
-		OrderEntity orderEntity = orderMapper.toEntity(orderDTO);
-		CustomerEntity customerEntity = customerRepository.findOne(orderDTO.getCustomerID());
+	public OrderEntity addOrder(OrderEntity orderEntity) {
+		CustomerEntity customerEntity = customerRepository.findOne(orderEntity.getCustomer().getId());
 		List<ItemEntity> items = itemRepository
-				.getAllItems(orderDTO.getItems().stream().map(ItemDTO::getItemID).collect(Collectors.toList()));
+				.getAllItems(orderEntity.getItems().stream().map(ItemEntity::getId).collect(Collectors.toList()));
 		orderEntity.setCustomer(customerEntity);
 		orderEntity.setItems(items);
-		orderEntity = orderRepository.addOrder(orderEntity);
-		return orderMapper.toDto(orderEntity);
+		return orderRepository.addOrder(orderEntity);
 	}
 
 	@Override
-	public OrderDTO findOne(String orderID) {
-		OrderEntity orderEntity = orderRepository.findOne(orderID);
-		return orderMapper.toDto(orderEntity);
+	public OrderEntity findOne(String orderID) {
+		return orderRepository.findOne(orderID);
 	}
 
 }

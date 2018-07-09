@@ -2,12 +2,14 @@ package fr.training.spring.shop.application.order;
 
 import java.util.List;
 
+import fr.training.spring.shop.domain.order.OrderEntity;
+
 public interface OrderManagement {
 
-	List<OrderDTO> getOrdersForCustomer(String customerID);
+	List<OrderEntity> getOrdersForCustomer(String customerID);
 
-	OrderDTO addOrder(OrderDTO order);
+	OrderEntity addOrder(OrderEntity order);
 
-	OrderDTO findOne(String orderID);
+	OrderEntity findOne(String orderID);
 
 }

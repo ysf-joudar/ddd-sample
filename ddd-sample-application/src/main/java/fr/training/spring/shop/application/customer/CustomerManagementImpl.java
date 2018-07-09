@@ -14,20 +14,14 @@ public class CustomerManagementImpl implements CustomerManagement {
 	@Autowired
 	private CustomerRepository customerRepository;
 
-	@Autowired
-	private CustomerMapper customeEntityMapper;
-
 	@Override
-	public CustomerDTO create(CustomerDTO customeDTO) {
-		CustomerEntity customerEntity = customeEntityMapper.toEntity(customeDTO);
-		customerEntity = customerRepository.create(customerEntity);
-		return customeEntityMapper.toDto(customerEntity);
+	public CustomerEntity create(CustomerEntity customerEntity) {
+		return customerRepository.create(customerEntity);
 	}
 
 	@Override
-	public CustomerDTO findOne(String customerID) {
-		CustomerEntity customerEntity = customerRepository.findOne(customerID);
-		return customeEntityMapper.toDto(customerEntity);
+	public CustomerEntity findOne(String customerID) {
+		return customerRepository.findOne(customerID);
 	}
 
 }

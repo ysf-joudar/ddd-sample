@@ -25,4 +25,9 @@ public class CustomerEntity extends BaseEntity {
 		this.customerVO = customerVO;
 	}
 
+	@Override
+	public String toString() {
+		return "CustomerEntity [customerVO=" + customerVO + ", toString()=" + super.toString() + "]";
+	}
+
 }

@@ -1,4 +1,4 @@
-package fr.training.spring.shop.application.customer;
+package fr.training.spring.shop.presentation.customer.rest;
 
 import java.io.Serializable;
 

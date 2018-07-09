@@ -68,4 +68,9 @@ public class CustomerVO implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "CustomerVO [name=" + name + ", password=" + password + "]";
+	}
+
 }

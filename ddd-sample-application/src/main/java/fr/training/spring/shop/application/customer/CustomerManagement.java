@@ -1,9 +1,11 @@
 package fr.training.spring.shop.application.customer;
 
+import fr.training.spring.shop.domain.customer.CustomerEntity;
+
 public interface CustomerManagement {
 
-	CustomerDTO create(CustomerDTO customer);
+	CustomerEntity create(CustomerEntity customer);
 
-	CustomerDTO findOne(String customerID);
+	CustomerEntity findOne(String customerID);
 
 }

@@ -34,7 +34,7 @@ public class ItemServiceImplTest {
 		ItemEntity itemEntity = new ItemEntity(new ItemVO("DESC99", 99));
 		List<ItemEntity> items = Arrays.asList(itemEntity);
 		when(itemRepository.getAllItems()).thenReturn(items);
-		List<ItemDTO> itemsResult = itemManagement.getAllItems();
+		List<ItemEntity> itemsResult = itemManagement.getAllItems();
 		assertNotNull(itemsResult);
 		assertTrue(itemsResult.size() == 1);
 	}
@@ -45,10 +45,9 @@ public class ItemServiceImplTest {
 		ItemEntity itemEntity = new ItemEntity(itemVO);
 		when(itemRepository.addItem(itemEntity)).thenReturn(itemEntity);
 
-		ItemDTO itemDTO = new ItemDTO(itemEntity.getId(), "DESC99", 99);
-		ItemDTO itemResultDTO = itemManagement.addItem(itemDTO);
-		assertNotNull(itemResultDTO);
-		assertEquals("DESC99", itemResultDTO.getDescription());
+		ItemEntity itemResultEntity = itemManagement.addItem(itemEntity);
+		assertNotNull(itemResultEntity);
+		assertEquals("DESC99", itemResultEntity.getItemVO().getDescription());
 	}
 
 }

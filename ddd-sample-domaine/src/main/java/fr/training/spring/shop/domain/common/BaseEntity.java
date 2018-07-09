@@ -41,4 +41,10 @@ public abstract class BaseEntity {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "BaseEntity [id=" + id + "]";
+	}
+
 }
