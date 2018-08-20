@@ -8,7 +8,7 @@ import fr.training.spring.shop.domain.customer.CustomerEntity;
 /**
  * Mapper for the entity CustomeEntity and its DTO CustomeDTO.
  */
-@Mapper
+@Mapper(componentModel = "spring")
 public interface CustomerMapper {
 
 	@Mapping(target = "customerVO.name", source = "name")

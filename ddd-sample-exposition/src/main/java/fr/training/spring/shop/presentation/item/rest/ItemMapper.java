@@ -10,7 +10,7 @@ import fr.training.spring.shop.domain.item.ItemEntity;
 /**
  * Mapper for the entity CustomeEntity and its DTO CustomeDTO.
  */
-@Mapper
+@Mapper(componentModel = "spring")
 public interface ItemMapper {
 
 	@Mapping(target = "itemVO.description", source = "description")

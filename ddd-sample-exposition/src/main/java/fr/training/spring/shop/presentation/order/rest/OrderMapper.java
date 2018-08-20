@@ -12,7 +12,7 @@ import fr.training.spring.shop.presentation.item.rest.ItemDTO;
 /**
  * Mapper for the entity CustomeEntity and its DTO CustomeDTO.
  */
-@Mapper
+@Mapper(componentModel = "spring")
 public interface OrderMapper {
 
 	@Mapping(target = "customer.id", source = "customerID")
