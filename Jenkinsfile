@@ -8,7 +8,7 @@ pipeline {
     }
     stage('Compile') {
       steps {
-        withMaven(maven: 'MAVEN-3', jdk: 'JDK-8') {
+       withMaven(maven: 'maven-3.5.4') {
           sh 'mvn clean compile'
         }
 
@@ -16,7 +16,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        withMaven(jdk: 'JDK-8', maven: 'MAVEN-3') {
+        withMaven(maven: 'maven-3.5.4') {
           sh 'mvn test'
         }
 
@@ -24,7 +24,7 @@ pipeline {
     }
     stage('Package') {
       steps {
-        withMaven(jdk: 'JDK-8', maven: 'MAVEN-3') {
+       withMaven(maven: 'maven-3.5.4') {
           sh 'mvn package -DskipTests'
         }
 
@@ -32,7 +32,7 @@ pipeline {
     }
     stage('Quality') {
       steps {
-        withMaven(jdk: 'JDK-8', maven: 'MAVEN-3') {
+       withMaven(maven: 'maven-3.5.4') {
           sh 'mvn sonar:sonar -Dsonar.projectKey="ddd-sample-master"'
         }
 
