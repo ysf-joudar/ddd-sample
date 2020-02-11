@@ -7,7 +7,6 @@ pipeline {
       }
     }
     stage('Compile') {
-      steps {
        withMaven(maven: 'maven') {
          		if(isUnix()) {
               sh "mvn clean compile" 
@@ -15,8 +14,6 @@ pipeline {
               bat "mvn clean compile" 
             } 
         }
-
-      }
     }
     stage('Test') {
       steps {
