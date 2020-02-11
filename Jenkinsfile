@@ -7,22 +7,17 @@ pipeline {
       }
     }
     stage('Compile') {
+      steps {
        withMaven(maven: 'maven') {
-         		if(isUnix()) {
-              sh "mvn clean compile" 
-            } else { 
-              bat "mvn clean compile" 
-            } 
+          bat 'mvn clean compile'
         }
+
+      }
     }
     stage('Test') {
       steps {
         withMaven(maven: 'maven') {
-          	if(isUnix()) {
-              sh "mvn test" 
-            } else { 
-              bat "mvn test" 
-            } 
+          bat 'mvn test'
         }
 
       }
@@ -30,22 +25,15 @@ pipeline {
     stage('Package') {
       steps {
        withMaven(maven: 'maven') {
-         if(isUnix()) {
-              sh "mvn package -DskipTests" 
-            } else { 
-              bat "mvn package -DskipTests"  
-            } 
+          bat 'mvn package -DskipTests'
         }
+
       }
     }
     stage('Quality') {
       steps {
        withMaven(maven: 'maven') {
-           if(isUnix()) {
-              sh 'mvn sonar:sonar -Dsonar.projectKey="ddd-sample-master"'
-            } else { 
-              bat 'mvn sonar:sonar -Dsonar.projectKey="ddd-sample-master"'
-            } 
+          bat 'mvn sonar:sonar -Dsonar.projectKey="ddd-sample-master"'
         }
 
       }
