@@ -33,7 +33,7 @@ pipeline {
     stage('Quality') {
       steps {
        withMaven(maven: 'maven') {
-          bat 'mvn sonar:sonar -Dsonar.projectKey="ddd-sample-master"'
+          bat 'mvn sonar:sonar -Dsonar.projectKey="ddd-sample-develop"'
         }
 
       }
