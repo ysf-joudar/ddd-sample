@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git(url: 'https://github.com/bnasslahsen/ddd-sample.git', credentialsId: 'git-login', branch: 'master')
+        git(url: 'https://github.com/bnasslahsen/ddd-sample.git', credentialsId: 'git-login', branch: 'develop')
       }
     }
     stage('Compile') {
@@ -33,7 +33,7 @@ pipeline {
     stage('Quality') {
       steps {
        withMaven(maven: 'maven') {
-          sh 'mvn sonar:sonar -Dsonar.projectKey="ddd-sample-master"'
+          sh 'mvn sonar:sonar -Dsonar.projectKey="ddd-sample-develop"'
         }
 
       }
