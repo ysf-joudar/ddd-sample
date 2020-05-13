@@ -30,9 +30,11 @@ pipeline {
 
       }
     }
-   stage ('APP-IC - Quality Analysis') {
-    withSonarQubeEnv('Sonar') {
-      bat 'mvn sonar:sonar'
+    stage('Quality') {
+      steps {
+       withSonarQubeEnv('Sonar') {
+          bat 'mvn sonar:sonar'
+        }
     }
   }    
  }
