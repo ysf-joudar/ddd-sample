@@ -9,7 +9,7 @@ pipeline {
     stage('Compile') {
       steps {
        withMaven(maven: 'maven') {
-          sh 'mvn clean compile'
+          bat 'mvn clean compile'
         }
 
       }
@@ -17,7 +17,7 @@ pipeline {
     stage('Test') {
       steps {
         withMaven(maven: 'maven') {
-          sh 'mvn test'
+          bat 'mvn test'
         }
 
       }
@@ -25,15 +25,15 @@ pipeline {
     stage('Package') {
       steps {
        withMaven(maven: 'maven') {
-          sh 'mvn package -DskipTests'
+          bat 'mvn package -DskipTests'
         }
 
       }
     }
     stage('Quality') {
       steps {
-       withMaven(maven: 'maven') {
-          sh 'mvn sonar:sonar -Dsonar.projectKey="ddd-sample-develop"'
+       withSonarQubeEnv('Sonar') {
+          bat 'mvn sonar:sonar -Dsonar.projectKey="ddd-sample-develop"'
         }
 
       }
